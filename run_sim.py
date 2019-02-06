@@ -46,6 +46,9 @@ def main():
                         help='Transient template (e.g. "salt2" or "nugent")')
     parser.add_argument('-z', '--redshift', default=None, nargs=2,
                         help='redshift boundaries', type=float)
+    parser.add_argument('--no-weather', action='store_true',
+                        help='do not apply weather loss')
+    
     
     args = parser.parse_args()
 
@@ -90,7 +93,20 @@ def main():
         k = 0
             
     outfile = 'lcs/lcs_%s_%s_%06i.pkl'%(args.transient, args.template, k)
-    lcs.save(outfile)
 
+    if not args.no_weather:
+        real_nights = np.genfromtxt('hours_per_obsnight.dat')
+        idx = np.concatenate((range(31,365), range(31)))
+        rn_2016 = np.where(real_nights[idx, -1] > 3.5)[0] + 2458151
+
+        def filterfunc(lc):
+            mask = np.array([(int(t_) in rn_2016) and (t_ < lc.meta['t0'] + 100) for t_ in lc['time']])
+            
+            return lc[mask]
+
+        lcs = lcs.filter(filterfunc)
+        
+    lcs.save(outfile)
+    
 if __name__ == '__main__':
     main()

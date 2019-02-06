@@ -25,5 +25,3 @@ from simsurvey import LigthcurveCollection
 lcs = LightcurveCollection(load='/path/to/file')
 ```
 Note that output files generated using Python 3 cannot be loaded with Python 2 and vice versa.
-
-TODO: add weather filtering
