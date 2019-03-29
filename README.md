@@ -4,7 +4,7 @@ Scripts and files required to reproduce the ZTF lightcurve simulations presented
 Requirements
 ------------
 
-- Install `simsurvey` and its required packages.
+- Install `simsurvey` and its required packages. The paper used `simsurvey v0.4.4`. Default settings in other versions may differ.
 - Download the data for `sfdmap` from https://github.com/kbarbary/sfddata
 - Set `$SFD_DIR` to the `sfddata` download path
 
