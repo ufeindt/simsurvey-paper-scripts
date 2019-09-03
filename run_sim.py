@@ -8,6 +8,8 @@ from astropy.table import Table
 import simsurvey
 import sncosmo
 
+_RATES = {'Ia': 3e-5, 'Ibc': 2.25e-5, 'IIn': 7.5e-6, 'IIP': 1.2e-4}
+
 def load_fields_ccd(fields_file='ztf_fields.txt', ccd_file='ztf_ccd_corners.txt'):
     fields_raw = np.genfromtxt(fields_file, comments='%')
 
@@ -71,6 +73,7 @@ def main():
     dec_range = (-40, 90)
 
     tr = simsurvey.get_transient_generator((args.redshift[0], args.redshift[1]),
+                                           ratefunc=(lambda z: _RATES[args.transient]),
                                            transient=args.transient, 
                                            template=args.template,
                                            ra_range=ra_range,
