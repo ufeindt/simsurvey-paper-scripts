@@ -1,5 +1,5 @@
 # simsurvey-paper-scripts
-Scripts and files required to reproduce the ZTF lightcurve simulations presented in Feindt et al. (2019)
+Scripts and files required to reproduce the ZTF lightcurve simulations presented in [Feindt et al. (2019)](https://arxiv.org/pdf/1902.03923.pdf)
 
 Requirements
 ------------
@@ -21,7 +21,7 @@ The script will save the output in the directory `lcs` and give it a file name t
 
 To load the output, use the following lines:
 ```
-from simsurvey import LigthcurveCollection
+from simsurvey import LightcurveCollection
 lcs = LightcurveCollection(load='/path/to/file')
 ```
 Note that output files generated using Python 3 cannot be loaded with Python 2 and vice versa.
